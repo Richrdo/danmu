@@ -1,0 +1,40 @@
+* {
+	margin: 0;
+}
+
+.dm_window {
+	width: 90%;
+	height: 453px;
+	border: 1px solid grey;
+	margin: 0 auto;
+	margin-bottom: 1.5em;
+	border-radius: 1%;
+}
+
+.dm_border {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 2;
+	width: 5%;
+	height: 453px;
+}
+
+.kit {
+	text-align: center;
+}
+
+.kit button {
+	background-color: green;
+	border: 2px solid #aaa;
+	border-radius: 5%;
+	width: 10em;
+	height: 2em;
+}
+
+.msg {
+	display: block;
+	margin: 1em auto;
+	width: 20em;
+	height: 1.5em;
+}
