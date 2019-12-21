@@ -20,8 +20,7 @@
 ## 技术要求
 
 1. 应用[通过配置文件生成](https://www.zhihu.com/question/264793741/answer/287934311?utm_source=qq&utm_medium=social&utm_oi=864887342530433024,"知乎关于配置文件生成应用的回答")（后期优化任务）
-2. 动画由[Request Animation Frame](https://juejin.im/post/5a82f0626fb9a06358657c9c
-   https://www.zhangxinxu.com/wordpress/2013/09/css3-animation-requestanimationframe-tween-%E5%8A%A8%E7%94%BB%E7%AE%97%E6%B3%95/)实现
+2. 动画由Request Animation Frame[[1]](https://juejin.im/post/5a82f0626fb9a06358657c9c)[[2]](https://www.zhangxinxu.com/wordpress/2013/09/css3-animation-requestanimationframe-tween-%E5%8A%A8%E7%94%BB%E7%AE%97%E6%B3%95/)实现
 
 ## 任务分解：
 
