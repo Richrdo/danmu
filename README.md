@@ -1,2 +1,40 @@
-# danmu
-17级前端大作业
+# 前端大作业
+
+## 变量名规范
+
+| 属性名   | 属性名       | 属性变量                             |
+| -------- | ------------ | ------------------------------------ |
+| 字号     | font-size    | small，standard                      |
+| 模式     | mode         | scroll,top,bottom                    |
+| 颜色     | color        | 例如：#ffffff                        |
+| 类型     | type         | scroll,top,bottom,high-rank,colorful |
+| 不透明度 | opacity      | 0到1的浮点数，精确在六位数字         |
+| 显示区域 | display-area | 1/2，1/4，3/4，1                     |
+| 弹幕速度 | velocity     | 视情况而定，为一个连续取值的区间     |
+| 字体大小 | font-size    | 同上                                 |
+
+字号模式颜色为一部分，剩下为另外一部分
+
+弹幕弹道数量为十五
+
+## 技术要求
+
+1. 应用[通过配置文件生成](https://www.zhihu.com/question/264793741/answer/287934311?utm_source=qq&utm_medium=social&utm_oi=864887342530433024,"知乎关于配置文件生成应用的回答")（后期优化任务）
+2. 动画由[Request Animation Frame](https://juejin.im/post/5a82f0626fb9a06358657c9c
+   https://www.zhangxinxu.com/wordpress/2013/09/css3-animation-requestanimationframe-tween-%E5%8A%A8%E7%94%BB%E7%AE%97%E6%B3%95/)实现
+
+## 任务分解：
+
+1. 弹幕设置（刘光辉）
+2. 字体设置（曾春）
+3. 弹幕动画，[css3](https://www.runoob.com/css3/css3-tutorial.html)和[canvas](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial)(后期优化任务)两种方式渲染（陈佳鑫）
+4. 数据流协调，页面结构(赖振辉)
+5. 接口联动，实现复用
+6. 移动端兼容
+
+## 参考资料
+
+1. [前端开发模式](https://blog.csdn.net/sinat_22209293/article/details/79101546)
+2. 在线调试javascript代码的平台[jsrun](https://jsrun.pro/)
+3. MDN [canvas教程](https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial)
+4. 阮一峰[canvas API介绍](http://w3cbus.com/htmlapi/canvas.html)
