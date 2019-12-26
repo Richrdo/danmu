@@ -1,0 +1,14 @@
+/* CSS Document */
+
+.setting-body{
+    background-color: rgba(89,89,89,0.30);
+    height: 350px;
+    width: 300px;
+}
+
+.hr15{
+    height: 15px;
+    border: none;
+    margin: 0px;
+    padding: 0px;
+}
