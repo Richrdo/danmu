@@ -1,0 +1,35 @@
+/*fontSetting*/
+#show{
+			margin: 0 auto;
+			width: 50%;
+			height: 200px;
+			background: grey;
+		}
+		p{
+			text-align: center;
+		}
+		#fontSetting{
+			color: #fff;
+			width: 300px;
+			height: 200px;
+			background: #222;
+		}
+		label{
+			text-align: left;
+		}
+		/*字体大小选择按钮*/
+		.sizeButton{
+			width: 70px;
+			height: 20px;
+			border:0px;
+			margin-left: 50px;
+			text-align: center;
+		}
+		/*弹幕位置选择按钮*/
+		.siteButton{
+			width: 40px;
+			height: 30px;
+			border: 0px;
+			margin-left: 20px;
+			text-align: center;
+		}
