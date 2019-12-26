@@ -1,17 +1,366 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-	<title>弹幕墙</title>
-	<link rel="stylesheet" type="text/css" href="index.css">
+<meta charset="utf-8">
+<title>弹幕</title>
+<meta name="renderer" content="webkit">
+<link rel="stylesheet" type="text/css" href="css/fontSetting.css">
+<link rel="stylesheet" href="css/setting.css">
+<link rel="stylesheet" href="layui/css/layui.css" media="all" />
+<link rel="stylesheet" href="css/index.css">
+<style>
+
+	video::-webkit-media-controls{
+		display:none !important;
+	}
+
+	.box1 {
+		width: 640px;
+		height: 480px;
+		padding: 5px;
+		margin: 30px auto;
+	}
+
+	.box2 {
+		position: relative;
+		top: -55px;
+		width: 100%;
+        height: 40px;
+		background-color:black;
+		opacity: 0.6;
+		padding-top: 10px;
+	}
+
+	.icon {
+       width: 1em; height: 1em;
+       vertical-align: -0.15em;
+       fill: currentColor;
+       overflow: hidden;
+	   color: #fff;
+	   font-size: 30px;
+    }
+
+	.contro1 {
+        display: flex;
+		justify-content:space-between;
+	}
+
+	.progress {
+		/* margin-top: 15px;  */
+		padding-top: 12px;
+		width:98%;
+		height: 12px;
+		position: absolute;
+		top: -14px;
+		left: 1%;
+	}
+
+	.layui-progress {
+		height: 4px;
+	}
+
+	.layui-progress-bar {
+		/* width: 300px; */
+		height: 4px;
+	}
+	
+	.left {
+		margin-left: 2%;
+	}
+
+	.right {
+		display: flex;
+		margin-right: 3%;
+	}
+
+	.volume-progress {
+		position: absolute;
+		height: 250px;
+		width: 70px;
+		top: -270px;
+		left: -20px;
+		background-color:black;
+		display: none;
+		/* display: inline-block; */
+	}
+
+	.right-volume,.right-fontSetting,.right-barrage {
+		position:relative;
+	}
+
+	a.icon-volume,a.icon-font,a.icon-barrage {
+		margin-right: 30px;
+	}
+
+	.font {
+		position: absolute;
+		top: -220px;
+		left: -130px;
+		display: none;
+		/* display: inline-block; */
+	}
+
+	.barrage{
+		position: absolute;
+		top: -320px;
+		left: -130px;
+		display: none;
+		/* display: inline-block; */
+	}
+
+</style>
 </head>
+
 <body>
-	<div class="dm_border"></div>
-	<div class="dm_window"></div>
-	<input type="text" name="danmu" class="msg" placeholder="请输入弹幕">
-	<div class="kit">
-		<button id="send" onclick="send()" >发射</button>
-		<button id="clear" onclick="clean()">清屏</button>
+	<div class="container">
+	<div class="box1">
+		<div class="dm_window">
+			<video src="1.mp4" width="100%" onclick="f1()"></video>
+		</div>
+			<div class="box2">
+
+				<!-- 进度条 -->
+				<div class="progress">
+					<div class="layui-progress">
+					<div class="current layui-progress-bar"></div>
+					</div>
+				</div>
+			
+				<!-- 控件 -->
+				<div class="contro1">
+
+					<!-- 开始暂停 -->
+					<div class="left">
+						<svg class="play icon" aria-hidden="true" onclick="f1()">
+							<use xlink:href="#iconkaishi"></use>
+						</svg>
+					</div>
+
+					
+					<input type="text" name="danmu" class="msg" placeholder="请输入弹幕">
+					<div class="kit">
+						<button id="send" onclick="send()" >发射</button>
+						<button id="clear" onclick="clean()">清屏</button>
+					</div>
+
+					<div class="right">
+
+						<!-- 弹幕设置 -->
+						<div class="right-barrage">
+							<div class="barrage">
+								<div class="setting-body">
+									<!--		显示区域设置-->
+									<div>
+										<label>弹幕类型</label>
+										<input type="radio" name="dm-type" value="roll">滚动
+										<input type="radio" name="dm-type" value="top">顶部
+										<input type="radio" name="dm-type" value="bottom">底部
+										<input type="radio" name="dm-type" value="multi">多彩
+									</div>
+									<div>
+										<label for="dm-area">显示区域</label>
+										<input type="range" id="dm-area" min="25" max="100" step="25" onChange="changeDanmuArea()">
+										<output id="show-num" for="dm-area"></output>
+									</div>
+									<div>
+										<label for="dm-speed">弹幕速度</label>
+										<input  type="range" id="dm-speed" min="10" max="30" step="2" onchange="changeDanmuSpeed()">
+									</div>
+									<div>
+										<label for="dm-font-clarity">弹幕透明度</label>
+										<input  type="range" id="dm-font-clarity" min="0" max="100" step="1" onchange="changeDanmuFontClarity()">
+									</div>
+								</div>
+								<div style="width: 300px;height: 20px"></div>
+							</div>
+							<a class="icon-barrage" >
+								<svg class="icon" aria-hidden="true">
+									<use xlink:href="#icondanmu"></use>
+								</svg>
+							</a>
+						</div>
+
+						<!-- 字体设置 -->
+						<div class="right-fontSetting">
+							<div class="font">
+								<div id="fontSetting">
+									<label>字号:</label>
+									<br/>
+									<button class="sizeButton" name="small" style="background: #00a1d6" onclick="changeFontSize('small')">小</button>
+									<button class="sizeButton" name="standard" onclick="changeFontSize('standard')">标准</button>
+									<br/>
+									<label>模式:</label>
+									<br/>
+									<button class="siteButton" name="roll" style="background: #00a1d6" onclick="changeFontSite('roll')">滚动</button>
+									<button class="siteButton" name="top" onclick="changeFontSite('top')">顶部</button>
+									<button class="siteButton" name="bottom" onclick="changeFontSite('bottom')">底部</button>
+									<br/>
+									<label>颜色:</label>
+									<br/>
+									<input type="radio" name="fontColor0" value="white" checked="checked" onclick="changeFontColor('white')">正常
+									<input type="radio" name="fontColor0" value="red" onclick="changeFontColor('red')"><span style="color: red">红色</span>
+									<input type="radio" name="fontColor0" value="blue" onclick="changeFontColor('blue')"><span style="color: blue">蓝色</span>
+									<input type="radio" name="fontColor0" value="green" onclick="changeFontColor('green')"><span style="color:green">绿色</span>
+									<input type="radio" name="fontColor0" value="randomColor" onclick="changeFontColor('randomColor')"><span id="randomColor">随机</span>
+									<br/>
+									<label for="fontColor">自定义颜色:</label>
+									<input type="color" id="fontColor" name="fontColor" value="#000000" onchange="changeFontColor(fontColor.value)">
+									<br/>
+								</div>
+								<div style="width: 300px;height: 20px"></div>
+							</div>
+							<a class="icon-font" >
+								<svg class="icon" aria-hidden="true">
+									<use xlink:href="#iconai247"></use>
+								</svg>
+							</a>
+						</div>
+						
+						<!-- 音量设置 -->
+						<div class="right-volume">
+							<div class="volume-progress">
+								<div id="slideTest12" style="margin-top: 30px; display: inline-block;">
+									<div class="layui-slider layui-slider-vertical" style="height: 200px;">
+										<!-- <div class="layui-slider-tips"></div> -->
+										<div class="layui-slider-bar" style="background:#009688; height:30%;bottom:0;"></div>
+										<div class="layui-slider-wrap" style="bottom:30%;">
+											<div class="layui-slider-wrap-btn" style="border: 2px solid #009688;"></div>
+										</div>
+									</div>
+								</div>
+								<div style="width: 70px;height: 40px"></div>
+							</div>
+							<a class="icon-volume" >
+								<svg class="icon" aria-hidden="true">
+									<use xlink:href="#iconyinliang"></use>
+								</svg>
+							</a>
+						</div>
+						
+						<!-- 全屏设置 -->
+						<a class="full-screen">
+							<svg class="icon" aria-hidden="true">
+								<use xlink:href="#iconquanping"></use>
+							</svg>
+						</a>
+					</div>
+					
+				</div>
+			</div>
 	</div>
+</div>
+
+<script>
+	var font = {
+		font_color: "white",
+		font_size: "32px",
+		font_site:"roll"
+	}
+</script>
+	
+<script src="js/setting.js" ></script>	
+<script src="js/fontSetting.js"></script>
+<script src="http://at.alicdn.com/t/font_1582882_zt5rxjxf2f.js"></script>
+<script src="layui/layui.js" charset="utf-8"></script>
+<!-- <script src="js/css3.js"></script> -->
+<script src="js/rAF.js"></script>
+<script>
+	var video = document.querySelector("video");
+	// 循环播放
+	video.loop = true;	
+
+	// 播放和暂停
+	function f1() {
+		// 判断当前是处于暂停还是播放状态
+        if (video.paused == true) {
+            video.play();
+            document.querySelector(".play use").setAttribute("xlink:href","#iconzantingtingzhi");
+        } else {
+            video.pause();
+            document.querySelector(".play use").setAttribute("xlink:href","#iconkaishi");
+        }
+	}
+	
+
+	// 更新进度条
+    // 拿到视频的总时长,求百分比,播放时调用
+    video.ontimeupdate = function () {
+        var percent = video.currentTime / video.duration * 100 + "%";
+        document.querySelector(".current").style.width = percent;
+    }
+
+	// 点击进度条,更新处理
+    document.querySelector(".progress").onclick = function (target) {
+        var width = this.offsetWidth;
+        var x = target.offsetX;
+        video.currentTime = x / width * video.duration;
+    }
+	
+	// 点击音量条,更新音量
+    // document.querySelector(".layui-slider").onclick = function (target) {
+    //     var height = this.offsetheight;
+    //     var y = target.offsetY;
+	// 	document.querySelector(".layui-slider-bar").style.height = y / height * 100 + "%";
+	// 	document.querySelector(".layui-slider-wrap").style.bottom = y / height * 100 + "%";
+    // }
+
+	document.querySelector(".full-screen").onclick = function () {
+        //进入全屏
+        // video.webkitRequestFullScreen();
+		if(!document.webkitIsFullScreen) {
+			document.querySelector(".box1").webkitRequestFullScreen();
+		}else {
+			document.webkitExitFullscreen();
+		}
+    }
+
+	// 音量设置
+	document.querySelector(".right-volume").onmouseover = function () {
+		document.querySelector(".volume-progress").style.display = "inline-block";
+		// console.log("in");
+	}
+	// if(document.querySelector(".volume-progress").style.display === "inline-block"){
+		// document.querySelector(".layui-slider-wrap-btn").ondrag = function (e) {
+		// 	var e=e||event;
+		// 	var y = e.offsetY - this.offsetTop;
+		// 	document.querySelector(".layui-slider-bar").style.height = y/document.querySelector(".layui-slider").offsetHeight * 100 + "%";
+		// 	document.querySelector(".layui-slider-wrap").style.bottom = y/document.querySelector(".layui-slider").offsetHeight * 100 + "%";
+			
+		// 	console.log(this.offsetTop);
+		// }
+	// }
+	
+	document.querySelector(".right-volume").onmouseout = function () {
+		document.querySelector(".volume-progress").style.display = "none";
+		console.log("out");
+	}
+
+	layui.use('slider', function(){
+		var $ = layui.$
+		,slider = layui.slider;
+		slider.render({
+			elem: '#slideTest12'
+			,value: 30
+			,type: 'vertical' //垂直滑块
+		});
+	});
+
+	// 字体设置
+	document.querySelector(".right-fontSetting").onmouseover = function () {
+		document.querySelector(".font").style.display = "inline-block";
+	}
+	document.querySelector(".right-fontSetting").onmouseout = function () {
+		document.querySelector(".font").style.display = "none";
+	}
+
+	// 弹幕设置
+	document.querySelector(".right-barrage").onmouseover = function () {
+		document.querySelector(".barrage").style.display = "inline-block";
+	}
+	document.querySelector(".right-barrage").onmouseout = function () {
+		document.querySelector(".barrage").style.display = "none";
+	}
+
+</script>
 </body>
-	<script type="text/javascript" src="index.js"></script>
 </html>

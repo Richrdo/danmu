@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>RequestAnimationFrame Demo</title>
+        <style>
+            #box1 {
+                position: absolute;
+                width: 100px;
+                height: 100px;
+                display: inline-block;
+                background-color: blue;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="box1" onclick="start()"></div>
+        <input type="button" value="停止" onclick="stop()">
+    </body>
+    <script>
+        window.requestAnimFrame = (function(){
+  return  window.requestAnimationFrame || 
+          window.webkitRequestAnimationFrame || 
+          window.mozRequestAnimationFrame || 
+          window.oRequestAnimationFrame || 
+          window.msRequestAnimationFrame || 
+          function(/* function FrameRequestCallback */ callback, /* DOMElement Element */ element){
+            window.setTimeout(callback, 1000 / 60);
+          };
+})();
+
+        var box = document.getElementById("box1");
+        var startTime;
+
+        function render(){
+            time = Date.now();
+            if(startTime === undefined){
+                startTime = time;
+            }
+
+            box.style.left = ((time - startTime)/10) + "px";
+        }
+
+        function start() {
+            console.log(box.style.left);
+            (function animeLoop(){
+                render();
+                requestAnimationFrame(animeLoop, box)
+            })();
+        }
+
+        function stop() {
+
+        }
+    </script>
+</html>

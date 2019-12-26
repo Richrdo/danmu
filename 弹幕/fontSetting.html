@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>字体设置</title>
+	<link rel="stylesheet" type="text/css" href="css/fontSetting.css">
+</head>
+<body>
+	<div id="show">
+		<p id="comment">字体设置测试</p>
+	</div>
+	 <div id="fontSetting">
+	 	<label>字号:</label>
+	 	<br/>
+	 	<button class="sizeButton" name="small" style="background: #00a1d6" onclick="changeFontSize('small')">小</button>
+	 	<button class="sizeButton" name="standard" onclick="changeFontSize('standard')">标准</button>
+	 	<br/>
+	 	<label>模式:</label>
+	 	<br/>
+	 	<button class="siteButton" name="roll" style="background: #00a1d6" onclick="changeFontSite('roll')">滚动</button>
+	 	<button class="siteButton" name="top" onclick="changeFontSite('top')">顶部</button>
+	 	<button class="siteButton" name="bottom" onclick="changeFontSite('bottom')">底部</button>
+	 	<br/>
+	 	<label>颜色:</label>
+		 <br/>
+	 	<input type="radio" name="fontColor0" value="white" checked="checked" onclick="changeFontColor('white')">正常
+	 	<input type="radio" name="fontColor0" value="red" onclick="changeFontColor('red')"><span style="color: red">红色</span>
+	 	<input type="radio" name="fontColor0" value="blue" onclick="changeFontColor('blue')"><span style="color: blue">蓝色</span>
+	 	<input type="radio" name="fontColor0" value="green" onclick="changeFontColor('green')"><span style="color:green">绿色</span>
+	 	<input type="radio" name="fontColor0" value="randomColor" onclick="changeFontColor('randomColor')"><span id="randomColor">随机</span>
+	 	<br/>
+	 	<label for="fontColor">自定义颜色:</label>
+	 	<input type="color" id="fontColor" name="fontColor" value="#000" onchange="changeFontColor(fontColor.value)">
+	 	<br/>
+	 </div>
+</body>
+<script src="js/fontSetting.js"></script>
+</html>
